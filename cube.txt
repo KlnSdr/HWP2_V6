@@ -1,0 +1,33 @@
+
+Name     cube ;
+PartNo   00 ;
+Date     14.11.2023 ;
+Revision 01 ;
+Designer  ;
+Company   ;
+Assembly  ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1 = clock;
+PIN 2 = x;
+
+/* *************** OUTPUT PINS *********************/
+PIN 19 = q2;
+PIN 18 = q1;
+PIN 17 = q0;
+
+PIN 16 = D;
+PIN 15 = C;
+PIN 14 = B;
+PIN 13 = A;
+
+q0.d = (!q2 & !q0      ) # (!q0 &  x       ) # (!q1 & !q0);
+q1.d = (!q2 &  q1 & !q0) # (!q2 & !q1 &  q0) # (!q1 &  q0 & x) # (q1 & !q0 & x);
+q2.d = (!q2 &  q1 &  q0) # ( q2 & !q1 & !q0) # ( q2 & !q0 & x) # (q2 & !q1 & x);
+
+A.d = !q2 # (!q1 & !q0);
+B.d = (!q2 & !q0      ) # (!q2 & !q1);
+C.d = (!q2 & !q1 & !q0);
+D.d =   q0              # ( q2 & q1);
